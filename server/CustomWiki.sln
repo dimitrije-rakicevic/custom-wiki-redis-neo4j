@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomWiki", "CustomWiki.csproj", "{064B9933-FFCC-283C-3780-CE29B73CA94F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{064B9933-FFCC-283C-3780-CE29B73CA94F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{064B9933-FFCC-283C-3780-CE29B73CA94F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{064B9933-FFCC-283C-3780-CE29B73CA94F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{064B9933-FFCC-283C-3780-CE29B73CA94F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B3096D1-4ABC-40A4-B21C-5A2436944BD1}
+	EndGlobalSection
+EndGlobal
