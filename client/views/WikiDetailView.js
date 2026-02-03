@@ -18,6 +18,8 @@ export class WikiDetailView {
         const mainContainer = document.createElement('div');
         mainContainer.className = 'wiki-detail-wrapper';
         this.container.appendChild(mainContainer);
+  
+        this.renderHeader(mainContainer);
 
         try {
             this.wiki = await this.wikiService.getWiki(this.wikiId);
@@ -26,10 +28,6 @@ export class WikiDetailView {
             this.wiki.isOwner = this.wiki.ownerUsername === user.username;
             
             this.pages = await this.wikiService.getPages(this.wikiId);
-
-            this.renderHeader(mainContainer);
-            
-            document.getElementById('wiki-title').textContent = this.wiki.name;
 
             const layoutContainer = document.createElement('div');
             layoutContainer.className = 'wiki-detail-container';
@@ -52,6 +50,7 @@ export class WikiDetailView {
     }
 
     renderHeader(parent) {
+        if(parent.innerHTML) { parent.innerHTML='' }
         const header = document.createElement('div');
         header.className = 'header';
 
@@ -66,24 +65,12 @@ export class WikiDetailView {
             this.onBack();
         };
         leftSection.appendChild(backBtn);
-
-        const title = document.createElement('h2');
-        title.textContent = 'Loading...';
-        title.id = 'wiki-title';
-        title.className = 'wiki-title-header';
-        leftSection.appendChild(title);
-
         const logo = document.createElement('h1');
         logo.innerHTML = 'Custom<span>Wiki</span>';
         logo.className = 'logo';
         leftSection.appendChild(logo);
 
         header.appendChild(leftSection);
-
-        const rightSection = document.createElement('div');
-        rightSection.className = 'header-right';
-        rightSection.id = 'header-right';
-        header.appendChild(rightSection);
 
         parent.appendChild(header);
     }
@@ -142,15 +129,20 @@ export class WikiDetailView {
         const wikiInfo = document.createElement('div');
         wikiInfo.className = 'wiki-info';
 
-        const description = document.createElement('p');
-        description.textContent = this.wiki.Description;
-        description.className = 'wiki-description';
-        wikiInfo.appendChild(description);
+        const name = document.createElement('h1')
+        name.className='wiki-name'
+        name.textContent = this.wiki.name;
+        wikiInfo.appendChild(name);
 
         const meta = document.createElement('div');
         meta.className = 'wiki-meta';
         meta.textContent = `Owner: ${this.wiki.ownerUsername}, ${this.wiki.subscriberCount} subscribers`;
         wikiInfo.appendChild(meta);
+
+        const description = document.createElement('p');
+        description.textContent = this.wiki.description;
+        description.className = 'wiki-description';
+        wikiInfo.appendChild(description);
 
         content.appendChild(wikiInfo);
 
@@ -356,7 +348,7 @@ export class WikiDetailView {
             const header = document.createElement('div');
             header.className = 'page-header';
 
-            const title = document.createElement('h2');
+            const title = document.createElement('h1');
             title.textContent = page.title;
             header.appendChild(title);
 

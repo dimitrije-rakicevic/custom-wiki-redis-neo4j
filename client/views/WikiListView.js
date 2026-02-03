@@ -55,8 +55,8 @@ export class WikiListView {
             this.ownedWikis = data.owned;
             this.subscribedWikis = data.subscribed;
 
-            this.subscribedWikiIds = new Set(this.subscribedWikis.map(w => w.id));
-            this.ownedWikiIds = new Set(this.ownedWikis.map(w => w.id));
+            // this.subscribedWikiIds = new Set(this.subscribedWikis.map(w => w.id));
+            // this.ownedWikiIds = new Set(this.ownedWikis.map(w => w.id));
             
             if (this.ownedWikis.length > 0) {
                 this.renderSection(sectionsContainer, 'My Wikis', this.ownedWikis, true);
