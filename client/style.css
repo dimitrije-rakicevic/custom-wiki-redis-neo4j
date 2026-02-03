@@ -19,7 +19,6 @@ body {
     padding: 20px;
 }
 
-/* ===== AUTH VIEW ===== */
 .auth-container {
     max-width: 400px;
     margin: 100px auto;
@@ -67,7 +66,7 @@ body {
 .btn-primary {
     width: 100%;
     padding: 12px;
-    background: #667eea;
+    background: #3047af;
     color: white;
     border: none;
     border-radius: 8px;
@@ -76,12 +75,13 @@ body {
 }
 
 .btn-primary:hover {
-    background: #5568d3;
+    background: #233591;
 }
 
 .btn-secondary {
     padding: 10px 20px;
-    background: #6c757d;
+    text-align: center;
+    background: #4d4d4d;
     color: white;
     border: none;
     font-size: 16px;
@@ -90,7 +90,7 @@ body {
 }
 
 .btn-secondary:hover {
-    background: #5a6268;
+    background: #3d3d3d;
 }
 
 .wiki-sidebar button {
@@ -136,6 +136,30 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
+.header-left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 1.5rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.logo span {
+    color: var(--primary-color);
+}
+
+.wiki-title-header {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    justify-self: center;
+    font-size: 2.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
 
 
 .header-right {
@@ -200,7 +224,6 @@ body {
     padding: 20px;
     border-radius: 10px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     border: 2px solid #f0f0f0;
     position: relative;
@@ -212,13 +235,11 @@ body {
 }
 
 .wiki-card h3 {
-    color: #333;
     margin-bottom: 10px;
 }
 
 .badge-owner {
     background: #ffd700;
-    color: #333;
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 12px;
@@ -238,7 +259,7 @@ body {
     top: 10px;
     right: 10px;
     padding: 6px 12px;
-    background: #6c757d;
+    background: #755f37;
     color: white;
     border: none;
     border-radius: 5px;
@@ -247,7 +268,7 @@ body {
 }
 
 .btn-manage:hover {
-    background: #5a6268;
+    background: #8f6f34;
 }
 
 .discover-card {
@@ -290,13 +311,11 @@ body {
 }
 
 .wiki-description {
-    color: #666;
     margin-bottom: 15px;
     font-size: 14px;
 }
 
 .wiki-meta {
-    color: #999;
     font-size: 12px;
 }
 
@@ -470,7 +489,7 @@ body {
 
 .wiki-chat h3 {
     margin-bottom: 15px;
-    color: #333;
+    color: #000000;
 }
 
 .page-list-item {
@@ -485,7 +504,7 @@ body {
 }
 
 .page-list-item.active {
-    border: 3px solid rgb(49, 49, 255);
+    border: 3px solid rgb(52, 52, 136);
 }
 
 .chat-messages {
@@ -499,13 +518,13 @@ body {
 
 .chat-message {
     font-size: 14px;
-    width: 80%;
+    width: 75%;
     word-wrap: break-word;
     overflow-wrap: break-word;
     margin-bottom: 10px;
-    padding: 8px;
+    padding: 10px;
     background: #f0f0f0;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .chat-message strong {
@@ -514,7 +533,7 @@ body {
 
 .chatter {
     strong {
-        color: yellow;
+        color: rgb(241, 241, 124);
     }
     background-color: darkblue;
     justify-self: end;
@@ -524,6 +543,7 @@ body {
 .chat-input-container {
     display: flex;
     gap: 10px;
+    margin-bottom: 10px;
 }
 
 .chat-input-container input {
@@ -680,7 +700,6 @@ body {
     text-decoration: none;
     font-weight: 500;
     cursor: pointer;
-    transition: color 0.2s ease;
 }
 
 .relationship-target:hover {
@@ -726,25 +745,10 @@ body {
 .online-users-header {
     font-size: 0.9rem;
     font-weight: 600;
-    color: #333;
     display: flex;
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 0.5rem;
-}
-
-.online-indicator {
-    font-size: 0.7rem;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
 }
 
 .online-users-list {
@@ -756,14 +760,13 @@ body {
 
 .online-user-item {
     font-size: 0.85rem;
-    color: #555;
     padding: 0.25rem 0.5rem;
     background: rgb(255, 255, 255);
     border-radius: 4px;
 }
 
 .online-user-item:hover {
-    background: #e9ecef;
+    background: #cee7ff;
 }
 
 .chat-placeholder {
@@ -815,15 +818,15 @@ body {
     padding: 0.5rem 0.75rem;
     font-size: 0.85rem;
     font-weight: 600;
-    color: #28a745;
-    background: #d4edda;
+    color: #ffffff;
+    background: #0c8628;
     border: 1px solid #c3e6cb;
     border-radius: 6px;
     cursor: pointer;
 }
 
 .btn-subscribed:hover {
-    background: #c3e6cb;
+    background: #b43319;
     border-color: #b1dfbb;
 }
 
@@ -835,8 +838,7 @@ body {
     padding: 0.5rem 0.75rem;
     font-size: 0.85rem;
     font-weight: 600;
-    color: #856404;
-    background: #fff3cd;
+    background: #ffc400;
     border: 1px solid #ffeaa7;
     border-radius: 6px;
 }

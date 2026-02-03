@@ -19,20 +19,17 @@ export class WikiDetailView {
         mainContainer.className = 'wiki-detail-wrapper';
         this.container.appendChild(mainContainer);
 
-        this.renderHeader(mainContainer);
-
         try {
             this.wiki = await this.wikiService.getWiki(this.wikiId);
 
-            const user = JSON.parse(localStorage.getItem('user'))
-            
-            this.wiki.isOwner = this.wiki.ownerUsername === user.username
+            const user = JSON.parse(localStorage.getItem('user'));
+            this.wiki.isOwner = this.wiki.ownerUsername === user.username;
             
             this.pages = await this.wikiService.getPages(this.wikiId);
 
-            console.log(this.pages);
-
-            document.getElementById('wiki-title').textContent = this.wiki.Name;
+            this.renderHeader(mainContainer);
+            
+            document.getElementById('wiki-title').textContent = this.wiki.name;
 
             const layoutContainer = document.createElement('div');
             layoutContainer.className = 'wiki-detail-container';
@@ -40,17 +37,15 @@ export class WikiDetailView {
 
             this.renderSidebar(layoutContainer);
             this.renderContent(layoutContainer);
+            
             if (this.wiki.isSubscribed) {
                 this.renderChat(layoutContainer);
-
                 await this.startSignalR();
-
                 this.loadChatHistory();
             } else {
                 this.renderChatPlaceholder(layoutContainer);
             }
             
-            this.loadChatHistory();
         } catch (error) {
             mainContainer.innerHTML += `<p class="error">Failed to load wiki: ${error.message}</p>`;
         }
@@ -61,11 +56,10 @@ export class WikiDetailView {
         header.className = 'header';
 
         const leftSection = document.createElement('div'); 
-        
         leftSection.className = 'header-left';
 
         const backBtn = document.createElement('button');
-        backBtn.textContent = 'Back';
+        backBtn.textContent = '← Back';
         backBtn.className = 'btn-secondary';
         backBtn.onclick = () => {
             this.stopSignalR();
@@ -73,10 +67,16 @@ export class WikiDetailView {
         };
         leftSection.appendChild(backBtn);
 
-        const title = document.createElement('h1');
+        const title = document.createElement('h2');
         title.textContent = 'Loading...';
         title.id = 'wiki-title';
+        title.className = 'wiki-title-header';
         leftSection.appendChild(title);
+
+        const logo = document.createElement('h1');
+        logo.innerHTML = 'Custom<span>Wiki</span>';
+        logo.className = 'logo';
+        leftSection.appendChild(logo);
 
         header.appendChild(leftSection);
 
@@ -149,7 +149,7 @@ export class WikiDetailView {
 
         const meta = document.createElement('div');
         meta.className = 'wiki-meta';
-        meta.textContent = `Owner: ${this.wiki.ownerUsername} • ${this.wiki.subscriberCount} subscribers`;
+        meta.textContent = `Owner: ${this.wiki.ownerUsername}, ${this.wiki.subscriberCount} subscribers`;
         wikiInfo.appendChild(meta);
 
         content.appendChild(wikiInfo);
@@ -844,11 +844,6 @@ export class WikiDetailView {
         const container = document.getElementById('chat-messages');
         if (!container) return;
         container.innerHTML = '';
-
-        if (messages.length === 0) {
-            container.innerHTML = '<p class="no-messages">No messages yet</p>';
-            return;
-        }
 
         messages.forEach(msg => {
             this.displayMessage(msg);

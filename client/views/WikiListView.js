@@ -174,7 +174,7 @@ export class WikiListView {
         const resultsGrid = document.createElement('div');
         resultsGrid.className = 'wiki-grid';
         resultsGrid.id = 'discover-results';
-        resultsGrid.innerHTML = '<p class="search-hint">Search for public wikis to discover new content</p>';
+        resultsGrid.innerHTML = '<p class="search-hint">Search results will appear here.</p>';
         section.appendChild(resultsGrid);
 
         parent.appendChild(section);
@@ -260,6 +260,13 @@ export class WikiListView {
             const unsubscribeBtn = document.createElement('button');
             unsubscribeBtn.textContent = 'Subscribed';
             unsubscribeBtn.className = 'btn-subscribed btn-small';
+            unsubscribeBtn.addEventListener('mouseenter', () => {
+                unsubscribeBtn.textContent = 'Leave wiki';
+            });
+
+            unsubscribeBtn.addEventListener('mouseleave', () => {
+                unsubscribeBtn.textContent = 'Subscribed';
+            });
             unsubscribeBtn.onclick = async () => {
                 if (!confirm(`Unsubscribe from "${wiki.name}"?`)) return;
                 try {
@@ -489,64 +496,17 @@ export class WikiListView {
         document.body.appendChild(modal);
     }
 
-    showDeleteConfirmation(wiki) {
-        const modal = document.createElement('div');
-        modal.className = 'modal';
-
-        const modalContent = document.createElement('div');
-        modalContent.className = 'modal-content';
-        modal.appendChild(modalContent);
-
-        const title = document.createElement('h2');
-        title.textContent = 'Delete Wiki';
-        modalContent.appendChild(title);
-
-        const warning = document.createElement('p');
-        warning.className = 'delete-warning';
-        warning.innerHTML = 'Are you sure you want to delete this wiki?';
-        modalContent.appendChild(warning);
-
-        const errorMsg = document.createElement('p');
-        errorMsg.className = 'error';
-        errorMsg.style.display = 'none';
-        modalContent.appendChild(errorMsg);
-
-        const btnContainer = document.createElement('div');
-        btnContainer.className = 'modal-buttons';
-
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Delete Wiki';
-        deleteBtn.className = 'btn-danger';
-        deleteBtn.onclick = async () => {
-            deleteBtn.disabled = true;
-            deleteBtn.textContent = 'Deleting...';
-            errorMsg.style.display = 'none';
-
+    async showDeleteConfirmation(wiki) {
+        if (confirm(`Are you sure you want to delete "${wiki.name}"?`)) {
             try {
                 await this.wikiService.deleteWiki(wiki.id);
-                document.body.removeChild(modal);
-                
                 this.container.innerHTML = '';
                 this.render();
             } catch (error) {
-                errorMsg.textContent = 'Failed to delete: ' + error.message;
-                errorMsg.style.display = 'block';
-                deleteBtn.textContent = 'Delete Wiki';
+                alert('Failed to delete wiki: ' + error.message);
             }
-        };
-
-        const cancelBtn = document.createElement('button');
-        cancelBtn.textContent = 'Cancel';
-        cancelBtn.className = 'btn-secondary';
-        cancelBtn.onclick = () => document.body.removeChild(modal);
-
-        btnContainer.appendChild(deleteBtn);
-        btnContainer.appendChild(cancelBtn);
-        modalContent.appendChild(btnContainer);
-
-        document.body.appendChild(modal);
+        }
     }
-
     showCreateWikiForm() {
         const modal = document.createElement('div');
         modal.className = 'modal';
@@ -568,7 +528,6 @@ export class WikiListView {
         const descInput = document.createElement('textarea');
         descInput.placeholder = 'Description';
         descInput.className = 'auth-input';
-        descInput.rows = 4;
         modalContent.appendChild(descInput);
 
         const privateCheckbox = document.createElement('div');
