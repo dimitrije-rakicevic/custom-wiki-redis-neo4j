@@ -458,7 +458,7 @@ export class WikiDetailView {
         modalContent.appendChild(titleInput);
 
         const contentInput = document.createElement('textarea');
-        contentInput.placeholder = 'Page Content (Markdown)';
+        contentInput.placeholder = 'Page description...';
         contentInput.className = 'auth-input';
         contentInput.rows = 10;
         modalContent.appendChild(contentInput);
